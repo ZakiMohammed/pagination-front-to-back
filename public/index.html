@@ -18,7 +18,20 @@
             <div class="col">
                 <h1 class="mb-4">🐠 Pagination Front to Back</h1>
 
-                <input type="text" name="search" id="search" class="form-control mb-3" placeholder="Search..." onkeyup="search()">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" id="search" class="form-control" placeholder="Search..."
+                        onkeyup="search()">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Order</button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button" onclick="order(this, 'Name')">Name</button></li>
+                        <li><button class="dropdown-item" type="button" onclick="order(this, 'Salary')">Salary</button></li>
+                        <li><button class="dropdown-item" type="button" onclick="order(this, 'Code')">Code</button></li>
+                        <li><button class="dropdown-item" type="button" onclick="order(this, 'Job')">Job</button></li>
+                        <li><button class="dropdown-item" type="button" onclick="order(this, 'Department')">Department</button></li>
+                    </ul>
+                </div>
+
                 <div id="employees"></div>
                 <nav>
                     <ul class="pagination justify-content-center">
@@ -42,13 +55,15 @@
         let filtered = 0;
         let size = 5;
         let searchText = '';
+        let orderBy = 'Name';
+        let orderDir = 'ASC';
 
         const dvEmployees = document.getElementById('employees');
 
         getEmployees();
 
         function getEmployees() {
-            const apiUrl = `http://localhost:3000/api/employees?page=${page}&size=${size}&search=${searchText}`;
+            const apiUrl = `http://localhost:3000/api/employees?page=${page}&size=${size}&search=${searchText}&orderBy=${orderBy}&orderDir=${orderDir}`;
             const xhr = new XMLHttpRequest();
             xhr.onload = () => {
                 if (xhr.status === 200) {
@@ -125,6 +140,11 @@
             }
         }
 
+        function order(element, by) {
+            orderBy = by;
+            orderDir = orderDir === 'ASC' ? 'DESC' : 'ASC';
+            getEmployees();
+        }
     </script>
 </body>
 
