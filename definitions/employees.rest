@@ -1,4 +1,13 @@
 #### Employee API
 
-#### Get All Employees
-GET http://localhost:3000/api/employees?page=1&size=5&search=pa&orderBy=Id&orderDir=ASC
+#### Get Employees with page 1 and default size 5 
+GET http://localhost:3000/api/employees
+
+#### Get Employees with page 1 and size 10
+GET http://localhost:3000/api/employees?page=1&size=10
+
+#### Get Employees with page 1, size 5 and search 'pa'
+GET http://localhost:3000/api/employees?page=1&size=5&search=pa
+
+#### Get Employees with page 1, size 5, search 'pa', orderBy 'Name' and orderDir 'ASC' 
+GET http://localhost:3000/api/employees?page=1&size=5&search=al&orderBy=Name&orderDir=ASC
